@@ -1,8 +1,13 @@
 const path = require("path");
 const DIST_PATH = path.resolve(__dirname, "../dist");
+const tsImportPlugin = require("ts-import-plugin");
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: "cheap-module-eval-source-map",
   entry: {
     index: "./src/index.js",
     framework: ["react", "react-dom"]
@@ -13,6 +18,32 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPlugin({
+                    libraryDirectory: "es",
+                    libraryName: "antd",
+                    style: "css"
+                  })
+                ]
+              }),
+              compilerOptions: {
+                module: "es2015"
+              }
+            }
+          }
+        ]
+      },
       {
         test: /\.(js|jsx)$/,
         use: "babel-loader",
@@ -40,5 +71,11 @@ module.exports = {
         }
       }
     ]
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    alias: {
+      "@": resolve("src")
+    }
   }
 };

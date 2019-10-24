@@ -24,7 +24,12 @@ module.exports = merge(common, {
           MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
-          "less-loader"
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true
+            }
+          }
         ]
       },
       {

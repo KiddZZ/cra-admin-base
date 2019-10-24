@@ -1,23 +1,31 @@
-import React from "react";
-import "./app.less";
-import zhCN from "antd/es/locale/zh_CN";
-import moment from "moment";
-import "moment/locale/zh-cn";
-import { ConfigProvider, Button } from "antd";
-import aa from '@/images/background.png'
+import React from 'react'
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import MenuLayout from '@/components/menu-layout/MenuLayout'
+import routes from './routes'
 
-moment.locale("zh-cn");
-
-function App() {
+function RouteWithSubRoutes (route: any) {
   return (
-    <ConfigProvider locale={zhCN}>
-      <div className="app">
-        <h1 className="text">Hello Webpack</h1>
-        <img className="background" src={aa} alt="" />
-        <Button>按钮</Button>
-      </div>
-    </ConfigProvider>
-  );
+    <Route
+      path={ route.path }
+      render={ props => (
+        // pass the sub-routes down to keep nesting
+        <route.component { ...props } routes={ route.routes } />
+      ) }
+    />
+  )
 }
 
-export default App;
+export default () => (
+  <Router>
+    <MenuLayout>
+      <Switch>
+        <Redirect from='/' to='/login' exact />
+        {
+          routes.map((route, i) => (
+            <RouteWithSubRoutes key={ i } { ...route } />
+          ))
+        }
+      </Switch>
+    </MenuLayout>
+  </Router>
+)

@@ -1,0 +1,46 @@
+.register{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568806938078&di=b349413c9d6d4ae5af86039354ed4b76&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F04%2F20181104105054_uZC5C.jpeg') no-repeat;
+    background-size:cover;
+    z-index: 1001;
+    &-middle{
+        width: 350px;
+        height: 200px;
+        position: relative;
+        top: 30%;
+        left: 40%;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.603);
+        color: black;
+        padding: 20px;
+        display:flex;
+        align-items: center;
+        &-box{
+            margin-top: 10px;
+         
+        }
+        &-title{
+            display: inline-block;
+            text-align: right;
+        }
+    }
+    .ant-input{
+        width: auto;
+        margin-bottom: 15px;
+    }
+    // .captcha{
+    //     width: 100px;  
+    // }
+}
+
+
+.captcha-img{
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: 40%;
+}

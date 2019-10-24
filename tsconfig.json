@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "commonjs",
     "target": "es6",
     "moduleResolution": "node",
     "jsx": "react",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, // ts import
+    "esModuleInterop": true, // ts import
     "declaration": true,
+    "experimentalDecorators": true, // 修饰器
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["./src/**/*", "./images.d.ts"],
+  "include": ["./src/**/*", "typings"],
   "exclude": ["../../node_modules"]
 }
